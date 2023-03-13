@@ -1,3 +1,8 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchContact } from 'redux/operations';
+import { selectIsLoading, selectError } from 'redux/selectors';
+
 import ContactsList from './ContactsList/ContactList';
 import ContactFilter from './ContactFilter/ContactFilter';
 import ContactsForm from './ContactsForm/ContactsForm';
@@ -10,6 +15,14 @@ const styleApp = {
 };
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
+
+  useEffect(() => {
+    dispatch(fetchContact());
+  }, [dispatch]);
   return (
     <div style={styleApp} className={css.app}>
       <div className={css.container}>
@@ -23,6 +36,7 @@ const App = () => {
         <div className={css.contacts}>
           <h2>Contacts</h2>
           <ContactFilter />
+          {isLoading && !error && <p>Loading</p>}
           <ContactsList />
         </div>
       </div>
