@@ -8,7 +8,7 @@ import css from './ContactsForm.module.css';
 
 const ContactsForm = () => {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
 
   const allContacts = useSelector(getContacts);
 
@@ -16,7 +16,7 @@ const ContactsForm = () => {
 
   const handleReset = () => {
     setName('');
-    setNumber('');
+    setPhone('');
   };
   const dublicate = name => {
     const normalisedName = name.toLocaleLowerCase();
@@ -28,7 +28,7 @@ const ContactsForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const newContacts = { name, number };
+    const newContacts = { name, phone };
     if (dublicate(name)) {
       alert(`${name} is already in contacts`);
       // handleReset();
@@ -56,10 +56,10 @@ const ContactsForm = () => {
       <label className={css.titleInputForm}>
         <span>Number</span>
         <input
-          onChange={e => setNumber(e.target.value)}
+          onChange={e => setPhone(e.target.value)}
           type="tel"
-          name="number"
-          value={number}
+          name="phone"
+          value={phone}
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
