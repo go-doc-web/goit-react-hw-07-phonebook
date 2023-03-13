@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
-import { setFilter } from '../../redux/Filter/filter-slice';
-import { getFilter } from '../../redux/Filter/filter-selectors';
+import { setFilter } from '../../redux/filter';
+import { getFilter } from '../../redux/selectors';
 
 import css from './ContactFilter.module.css';
 
@@ -11,7 +11,7 @@ const ContactFilter = () => {
 
   const dispatch = useDispatch();
   const handleFilterChange = ({ target }) => {
-    dispatch(setFilter(target.value));
+    dispatch(setFilter(target.value.toLowerCase()));
   };
 
   return (
